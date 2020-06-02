@@ -10,16 +10,8 @@ object Libs {
         const val stdlib = "stdlib-jdk8"
         const val reflect = "reflect"
         const val jvm = "jvm"
+        const val kapt = "kapt"
         const val spring = "plugin.spring"
-    }
-
-    //模块
-    object Module {
-        const val app=":app"
-        const val util=":util"
-        const val controller=":controller"
-        const val model=":model"
-        const val service=":service"
     }
 
     //spring
@@ -29,10 +21,11 @@ object Libs {
 
     //springBoot
     object SpringBoot {
-        const val plugin = "org.springframework.boot"
-        const val starter = "$plugin:spring-boot-starter"
-        const val starterWebflux = "$plugin:spring-boot-starter-webflux"
-        const val starterTest = "$plugin:spring-boot-starter-test"
+        const val group = "org.springframework.boot"
+        const val starterWeb = "$group:spring-boot-starter-web"
+        const val starterWebFlux = "$group:spring-boot-starter-webflux"
+        const val starterTest = "$group:spring-boot-starter-test"
+        const val configuration = "$group:spring-boot-configuration-processor"
     }
 
     //协程
@@ -51,8 +44,23 @@ object Libs {
     }
 
     //json处理
-    object MoShi {
-        const val core = "com.squareup.moshi:moshi:${Versions.moshi}"
-        const val plugin = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+    object Gson {
+        const val core = "com.google.code.gson:gson:${Versions.gson}"
+    }
+
+    //MybatisPlus
+    object MybatisPlus {
+        private const val group = "com.baomidou"
+        const val springBoot = "$group:mybatis-plus-boot-starter:${Versions.mybatisPlus}"
+    }
+
+    //mysql
+    object Mysql {
+        const val connector = "mysql:mysql-connector-java"
+    }
+
+    object QiNiu {
+        private const val group = "com.qiniu:qiniu-java-sdk"
+        const val core = "$group:${Versions.qiNiu}"
     }
 }

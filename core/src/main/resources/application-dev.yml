@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url:  jdbc:mysql://192.168.112.128:3306/54ysy?serverTimezone=UTC
+    username: root
+    password: 123456
+qiniu:
+  bucket: 54ysy-dev

@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+
+server:
+  port: 80
+
+qiniu:
+  accessKey:  eCnHA6rDVdbhQ6KX-qaDltge0vKDDd26-MiWn2K2
+  secretKey:  LVvD1P8Df-x0zwawqH70v0kPT30Ix1wCYwiLtvtN

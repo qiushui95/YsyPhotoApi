@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id(Libs.SpringBoot.plugin) version Versions.springBoot
+    id(Libs.SpringBoot.group) version Versions.springBoot
     id(Libs.Spring.plugin) version Versions.springPlugin
     kotlin(Libs.Kotlin.jvm) version Versions.kotlin
     kotlin(Libs.Kotlin.spring) version Versions.kotlin
