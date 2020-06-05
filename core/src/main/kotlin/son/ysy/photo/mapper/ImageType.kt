@@ -1,4 +1,4 @@
-package son.ysy.photo.model.pojo
+package son.ysy.photo.mapper
 
 /**
  * 图片类型限制注解

@@ -17,7 +17,6 @@ class YsyPhotoApiApplicationTests {
 
     @Test
     fun contextLoads() {
-        println("========================================")
         val start = System.currentTimeMillis()
         println(qiNiuProperty)
         println(System.currentTimeMillis() - start)

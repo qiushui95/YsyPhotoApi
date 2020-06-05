@@ -1,17 +1,22 @@
 package son.ysy.photo.model.pojo
 
-import son.ysy.photo.model.pojo.BasePOJO
+import com.baomidou.mybatisplus.annotation.TableField
+import com.baomidou.mybatisplus.annotation.TableName
+import son.ysy.photo.mapper.DatabaseTables
 
 /**
  * 用户信息POJO
  */
+@TableName(DatabaseTables.UserInfo.TABLE_NAME)
 data class POJOUserInfo(
         /**
          * 用户手机号
          */
+        @TableField(DatabaseTables.UserInfo.FIELD_NAME_PHONE)
         val phone: String,
         /**
          * 关系id外键
          */
+        @TableField(DatabaseTables.UserInfo.FIELD_NAME_RELATIONSHIP_ID)
         val relationshipId: String
 ) : BasePOJO()
