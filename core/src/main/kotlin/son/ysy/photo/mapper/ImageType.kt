@@ -1,16 +1,32 @@
 package son.ysy.photo.mapper
 
+import son.ysy.photo.throwables.ImageTypeNotDefineException
+
 /**
- * 图片类型限制注解
+ * 图片类型
  */
-object ImageType {
-    /**
-     * 普通图片
-     */
-    const val NORMAL = 1
+sealed class ImageType(val type: Int, val prefix: String) {
 
     /**
-     * 头像图片
+     * 照片
      */
-    const val AVATAR = 2
+    object Photo : ImageType(1, "photo/")
+
+    /**
+     * 头像
+     */
+    object Avatar : ImageType(2, "avatar/")
+
+
+    companion object {
+        private val imageTypeArray = arrayOf(Photo, Avatar)
+
+        /**
+         * 通过传入type获取ImageType
+         */
+        @Throws(ImageTypeNotDefineException::class)
+        fun getImageTypeByType(type: Int) = imageTypeArray.firstOrNull {
+            it.type == type
+        } ?: throw ImageTypeNotDefineException()
+    }
 }

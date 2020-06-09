@@ -13,6 +13,7 @@ class QiNiuProperty {
     lateinit var secretKey: String
 
     lateinit var bucket: String
+
     override fun toString(): String {
         return "QiNiuProperty(accessKey='$accessKey', secretKey='$secretKey', bucket='$bucket')"
     }

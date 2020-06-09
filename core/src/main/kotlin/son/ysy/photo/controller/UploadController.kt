@@ -16,5 +16,5 @@ class UploadController {
     fun preCheck(@RequestBody uploadImageList: List<RequestPreCheck>) = uploadService.preCheck(uploadImageList)
 
     @GetMapping("token")
-    fun getUploadToken(imageType: Int)
+    fun getUploadToken(@RequestParam(name = "imageType") type: Int)=uploadService.getUploadToken(type)
 }
