@@ -26,6 +26,8 @@ object Libs {
         const val starterWebFlux = "$group:spring-boot-starter-webflux"
         const val starterTest = "$group:spring-boot-starter-test"
         const val configuration = "$group:spring-boot-configuration-processor"
+        const val cache = "$group:spring-boot-starter-cache"
+        const val starterRedis = "$group:spring-boot-starter-data-redis"
     }
 
     //协程

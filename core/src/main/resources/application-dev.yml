@@ -3,5 +3,9 @@ spring:
     url:  jdbc:mysql://192.168.112.128:3306/54ysy?serverTimezone=UTC
     username: root
     password: 123456
+  redis:
+    database: 0
+    host: 192.168.112.128
+    port: 6379
 qiniu:
   bucket: 54ysy-dev

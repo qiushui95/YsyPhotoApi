@@ -10,7 +10,7 @@ import son.ysy.photo.mapper.DatabaseTables
 import son.ysy.photo.mapper.ImageInfoMapper
 import son.ysy.photo.mapper.ImageType
 import son.ysy.photo.model.pojo.POJOImageInfo
-import son.ysy.photo.model.request.RequestPreCheck
+import son.ysy.photo.model.request.RequestUploadPreCheck
 import son.ysy.photo.model.response.ResponsePreCheck
 import son.ysy.photo.model.response.ResponseUploadToken
 import son.ysy.photo.property.QiNiuProperty
@@ -26,7 +26,7 @@ class UploadServiceImpl : IUploadService {
     @Autowired
     private lateinit var qiNiuProperty: QiNiuProperty
 
-    override fun preCheck(uploadImageList: List<RequestPreCheck>): ResponsePreCheck {
+    override fun preCheck(uploadImageList: List<RequestUploadPreCheck>): ResponsePreCheck {
         val list = imageInfoMapper.selectList(
                 QueryWrapper<POJOImageInfo>()
                         .`in`(DatabaseTables.ImageInfo.FIELD_NAME_MD5, uploadImageList.map { it.md5.toLowerCase(Locale.ENGLISH) })

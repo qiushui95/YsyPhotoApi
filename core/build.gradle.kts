@@ -12,6 +12,8 @@ dependencies {
     implementation(Libs.SpringBoot.starterWeb) {
         exclude(group = "org.springframework.boot", module = "spring-boot-starter-json")
     }
+    implementation(Libs.SpringBoot.cache)
+    implementation(Libs.SpringBoot.starterRedis)
     testImplementation(Libs.SpringBoot.starterTest)
     kapt(Libs.SpringBoot.configuration)
 

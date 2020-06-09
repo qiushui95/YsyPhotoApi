@@ -1,7 +1,7 @@
 package son.ysy.photo.model.request
 
 
-class RequestPreCheck {
+class RequestUploadPreCheck {
 
     lateinit var md5: String
 }

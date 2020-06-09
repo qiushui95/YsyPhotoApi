@@ -1,10 +1,9 @@
 package son.ysy.photo.core
 
 import org.mybatis.spring.annotation.MapperScan
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
+import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.ComponentScans
 
@@ -16,6 +15,7 @@ import org.springframework.context.annotation.ComponentScans
         ComponentScan("son.ysy.photo.service"),
         ComponentScan("son.ysy.photo.controller")
 )
+@EnableCaching
 open class YsyPhotoApiApplication
 
 fun main(args: Array<String>) {
