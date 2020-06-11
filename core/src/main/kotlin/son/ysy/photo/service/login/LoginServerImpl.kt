@@ -24,12 +24,19 @@ class LoginServerImpl : ILoginServer {
                 QueryWrapper<POJOUserInfo>()
                         .eq(DatabaseTables.UserInfo.FIELD_NAME_PHONE, phone)
         )
-        if (userInfo == null) {
-            throw NoUserException()
-        } else if (stringRedisTemplate.hasKey(userInfo.id)) {
-            throw OtherUserHasLoginException()
-        } else {
-            return ResponseLoginToken(phone)
+        when {
+            userInfo == null -> {
+                throw NoUserException()
+            }
+            stringRedisTemplate.hasKey(userInfo.id) -> {
+                throw OtherUserHasLoginException()
+            }
+            else -> {
+                val token = phone
+                stringRedisTemplate.opsForValue()
+                        .set(userInfo.id, token)
+                return ResponseLoginToken(token)
+            }
         }
     }
 }
