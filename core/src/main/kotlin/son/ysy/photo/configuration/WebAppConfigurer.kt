@@ -15,6 +15,6 @@ open class WebAppConfigurer : WebMvcConfigurer {
     override fun addInterceptors(registry: InterceptorRegistry) {
         super.addInterceptors(registry)
         registry.addInterceptor(getTokenInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/login/**")
+                .excludePathPatterns("/login/post")
     }
 }

@@ -1,8 +1,8 @@
 package son.ysy.photo.service.login
 
-import son.ysy.photo.model.response.ResponseLoginToken
+import son.ysy.photo.model.response.ResponseLoginResult
 
 interface ILoginServer {
 
-    fun getLoginToken(phone: String): ResponseLoginToken
+    fun getLoginToken(phone: String): ResponseLoginResult
 }

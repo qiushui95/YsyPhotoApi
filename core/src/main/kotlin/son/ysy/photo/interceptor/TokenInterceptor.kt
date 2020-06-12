@@ -22,7 +22,7 @@ class TokenInterceptor : HandlerInterceptorAdapter() {
         val token = request.getHeader(HEADER_KEY_TOKEN)
         val userId = request.getHeader(HEADER_KEY_USER_ID)
         when {
-            token == null || userId == null -> {
+            token.isNullOrBlank() || userId.isNullOrBlank() -> {
                 throw  LoginNotFindInHeaderException()
             }
             !redisTemplate.hasKey(userId) || redisTemplate.opsForValue().get(userId) != token -> {

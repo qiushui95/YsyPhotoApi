@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import son.ysy.photo.mapper.DatabaseTables
 import son.ysy.photo.mapper.UserInfoMapper
 import son.ysy.photo.model.pojo.POJOUserInfo
-import son.ysy.photo.model.response.ResponseLoginToken
+import son.ysy.photo.model.response.ResponseLoginResult
 import son.ysy.photo.throwables.NoUserException
 import son.ysy.photo.throwables.OtherUserHasLoginException
 
@@ -19,7 +19,7 @@ class LoginServerImpl : ILoginServer {
     @Autowired
     private lateinit var stringRedisTemplate: StringRedisTemplate
 
-    override fun getLoginToken(phone: String): ResponseLoginToken {
+    override fun getLoginToken(phone: String): ResponseLoginResult {
         val userInfo = userInfoMapper.selectOne(
                 QueryWrapper<POJOUserInfo>()
                         .eq(DatabaseTables.UserInfo.FIELD_NAME_PHONE, phone)
@@ -35,7 +35,7 @@ class LoginServerImpl : ILoginServer {
                 val token = phone
                 stringRedisTemplate.opsForValue()
                         .set(userInfo.id, token)
-                return ResponseLoginToken(token)
+                return ResponseLoginResult(userInfo.id, token)
             }
         }
     }
