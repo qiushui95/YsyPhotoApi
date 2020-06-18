@@ -1,0 +1,1 @@
+INSERT INTO `ImageInfo`(`id`, `imageUrl`, `width`, `height`, `hasDelete`, `imageType`, `takeTime`, `md5`, `userId`, `createTime`, `updateTime`) VALUES ('587ecfc4-57b3-4617-93dc-137b942e0964', '123', 123, 123, b'0', 1, '2020-06-16 16:18:52', '456789', '', '2020-06-16 08:19:08', '2020-06-16 09:46:09');
