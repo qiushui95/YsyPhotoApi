@@ -29,6 +29,5 @@ open class WebAppConfigurer : WebMvcConfigurer {
 
         registry.addInterceptor(getTokenInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login")
     }
 }

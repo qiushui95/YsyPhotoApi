@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component
 @Component
 @ConfigurationProperties("application")
 class ApplicationProperty {
-    var versionCode: Int = 0
+    var minVersionCode: Int = 0
 }

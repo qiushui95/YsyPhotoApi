@@ -8,4 +8,4 @@ qiniu:
   host: http://qiniudev.54ysy.site
 
 application:
-  versionCode: 1
+  minVersionCode: 1
