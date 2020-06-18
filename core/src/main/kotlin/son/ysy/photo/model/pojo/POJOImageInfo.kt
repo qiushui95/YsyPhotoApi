@@ -9,7 +9,7 @@ import java.util.*
  * 图像信息POJO
  */
 @TableName(DatabaseTables.ImageInfo.TABLE_NAME)
-class POJOImageInfo(
+data class POJOImageInfo(
         /**
          * 图片链接
          */

@@ -1,6 +1,6 @@
 package son.ysy.photo.mapper
 
-import son.ysy.photo.throwables.ImageTypeNotDefineException
+import son.ysy.photo.throwables.upload.ImageTypeNotDefineException
 
 /**
  * 图片类型

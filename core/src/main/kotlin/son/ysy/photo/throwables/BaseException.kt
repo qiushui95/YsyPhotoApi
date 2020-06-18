@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 abstract class BaseException(
         val code: Int,
-        msg: String
-) : RuntimeException(msg) {
+        private val exceptionMessage: ExceptionMessage
+) : RuntimeException(exceptionMessage.debug) {
     data class ErrorResponseResult(
             @SerializedName("code")
             val code: Int,
@@ -13,5 +13,13 @@ abstract class BaseException(
             val msg: String
     )
 
-    val responseResult = ErrorResponseResult(code, msg)
+    var isDebug: Boolean = false
+
+    val responseResult: ErrorResponseResult
+        get() = ErrorResponseResult(
+                code,
+                exceptionMessage.debug.takeIf {
+                    isDebug == true
+                } ?: exceptionMessage.release
+        )
 }

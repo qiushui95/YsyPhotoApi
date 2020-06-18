@@ -11,4 +11,7 @@ abstract class BasePOJO {
      */
     @TableId(DatabaseTables.Common.FIELD_ID, type = IdType.ASSIGN_UUID)
     var id: String = UUID.randomUUID().toString()
+    override fun toString(): String {
+        return "BasePOJO(id='$id')"
+    }
 }

@@ -1,8 +1,10 @@
 package son.ysy.photo.property
 
+import com.qiniu.util.Auth
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.PropertySource
 import org.springframework.stereotype.Component
+import java.net.URLEncoder
 
 @Component
 @ConfigurationProperties("qiniu")
@@ -14,7 +16,19 @@ class QiNiuProperty {
 
     lateinit var bucket: String
 
-    override fun toString(): String {
-        return "QiNiuProperty(accessKey='$accessKey', secretKey='$secretKey', bucket='$bucket')"
+    lateinit var host: String
+
+    lateinit var defaultAvatar: String
+
+    private fun createAuth() = Auth.create(accessKey, secretKey)
+
+    fun createUploadToken(): String = createAuth()
+            .uploadToken(bucket, null, 10 * 60, null)
+
+    fun encodeImageUrl(fileName: String): String {
+        val encodedFileName = URLEncoder.encode(fileName, "UTF-8").replace("+", "%20")
+        val publicUrl = "$host/$encodedFileName"
+        val expireInSeconds = 60L * 10
+        return createAuth().privateDownloadUrl(publicUrl, expireInSeconds)
     }
 }

@@ -17,13 +17,7 @@ object DatabaseTables {
         const val FIELD_NAME_IMAGE_TYPE = "imageType"
         const val FIELD_NAME_TAKE_TIME = "takeTime"
         const val FIELD_NAME_MD5 = "md5"
-    }
-
-    object AvatarRecord {
-        const val TABLE_NAME = "AvatarRecord"
         const val FIELD_NAME_USER_ID = "userId"
-        const val FIELD_NAME_IMAGE_ID = "imageId"
-        const val FIELD_NAME_IS_CURRENT = "isCurrent"
     }
 
     object RelationshipInfo {
@@ -34,6 +28,7 @@ object DatabaseTables {
     object UserInfo {
         const val TABLE_NAME = "UserInfo"
         const val FIELD_NAME_PHONE = "phone"
+        const val FIELD_NAME_AVATAR_ID = "avatarId"
         const val FIELD_NAME_RELATIONSHIP_ID = "relationshipId"
     }
 }

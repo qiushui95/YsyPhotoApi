@@ -9,7 +9,7 @@ import son.ysy.photo.model.pojo.BasePOJO
  * 和杨时逸的关系POJO
  */
 @TableName(DatabaseTables.RelationshipInfo.TABLE_NAME)
-class POJORelationshipInfo(
+data class POJORelationshipInfo(
         /**
          * 关系文本
          */

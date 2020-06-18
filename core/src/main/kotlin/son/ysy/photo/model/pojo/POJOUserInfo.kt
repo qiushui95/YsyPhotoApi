@@ -15,8 +15,13 @@ data class POJOUserInfo(
         @TableField(DatabaseTables.UserInfo.FIELD_NAME_PHONE)
         val phone: String,
         /**
+         * 用户手机号
+         */
+        @TableField(DatabaseTables.UserInfo.FIELD_NAME_AVATAR_ID)
+        val avatarId: String?,
+        /**
          * 关系id外键
          */
         @TableField(DatabaseTables.UserInfo.FIELD_NAME_RELATIONSHIP_ID)
-        val relationshipId: String
+        val relationshipId: String?
 ) : BasePOJO()

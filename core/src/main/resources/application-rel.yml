@@ -5,3 +5,7 @@ spring:
     password: 123456
 qiniu:
   bucket: 54ysy
+  host: http://qiniudev.54ysy.site
+
+application:
+  versionCode: 1

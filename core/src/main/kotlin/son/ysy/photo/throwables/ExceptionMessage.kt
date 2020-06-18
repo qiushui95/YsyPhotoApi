@@ -1,28 +1,38 @@
 package son.ysy.photo.throwables
 
-object ExceptionMessage {
-    /**
-     * 错误信息-图片类型未定义
-     */
-    const val MESSAGE_IMAGE_TYPE_NOT_DEFINE = "未知图片类型"
+sealed class ExceptionMessage(val debug: String, val release: String) {
+    private companion object {
+        const val MESSAGE_NOT_LOGIN = "暂未登录,请先登录"
+    }
 
-    /**
-     * 错误信息-header无登录信息
-     */
-    const val MESSAGE_TOKEN_NOT_FIND_IN_HEADER = "header中未找到登录参数"
+    constructor(message: String) : this(message, message)
 
-    /**
-     * 错误信息-header无登录信息
-     */
-    const val MESSAGE_TOKEN_EXPIRED = "登录信息过期"
+    //region 未定义异常
+    class NotDefineError(message: String) : ExceptionMessage(message, "服务器异常,请稍后重试")
+    //endregion
 
-    /**
-     * 错误信息-用户未注册
-     */
-    const val MESSAGE_NO_USER = "用户未注册,请联系管理员"
+    class CustomError(debug: String, release: String) : ExceptionMessage(debug, release)
 
-    /**
-     * 错误信息-已登录在其他设备
-     */
-    const val MESSAGE_LOGIN_ON_OTHER_DEVICE = "该手机号已登录在其他设备,请联系管理员"
+    //region 图片类型未定义
+    object ImageTypeNotDefine : ExceptionMessage("未知图片类型")
+    //endregion
+
+    //region header无登录信息
+    object TokenNotFindInHeader : ExceptionMessage("header登录参数缺失", MESSAGE_NOT_LOGIN)
+    //endregion
+
+
+    //region token过期
+    object TokenExpired : ExceptionMessage("登录信息过期,请重新登录")
+    //endregion
+
+
+    //region 用户未注册
+    object UserNotRegister : ExceptionMessage("用户未注册,请联系管理员")
+    //endregion
+
+
+    //region 手机号已登录在其他设备
+    object LoginOnOtherDevice : ExceptionMessage("该手机号已登录在其他设备,请联系管理员")
+    //endregion
 }

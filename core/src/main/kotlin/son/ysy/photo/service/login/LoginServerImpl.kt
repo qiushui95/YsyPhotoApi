@@ -8,8 +8,8 @@ import son.ysy.photo.mapper.DatabaseTables
 import son.ysy.photo.mapper.UserInfoMapper
 import son.ysy.photo.model.pojo.POJOUserInfo
 import son.ysy.photo.model.response.ResponseLoginResult
-import son.ysy.photo.throwables.NoUserException
-import son.ysy.photo.throwables.OtherUserHasLoginException
+import son.ysy.photo.throwables.login.UserNotRegisterException
+import son.ysy.photo.throwables.login.OtherUserHasLoginException
 
 @Service
 class LoginServerImpl : ILoginServer {
@@ -26,7 +26,7 @@ class LoginServerImpl : ILoginServer {
         )
         when {
             userInfo == null -> {
-                throw NoUserException()
+                throw UserNotRegisterException()
             }
             stringRedisTemplate.hasKey(userInfo.id) -> {
                 throw OtherUserHasLoginException()

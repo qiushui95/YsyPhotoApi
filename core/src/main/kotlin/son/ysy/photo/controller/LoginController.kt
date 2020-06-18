@@ -11,7 +11,7 @@ class LoginController {
     @Autowired
     private lateinit var loginserver: ILoginServer
 
-    @PostMapping("post")
+    @PostMapping
     fun postLogin(@RequestParam("phone") phone: String) = loginserver.getLoginToken(phone)
 
     @GetMapping("check")

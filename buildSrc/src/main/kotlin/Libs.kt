@@ -24,6 +24,7 @@ object Libs {
         const val group = "org.springframework.boot"
         const val starterWeb = "$group:spring-boot-starter-web"
         const val starterWebFlux = "$group:spring-boot-starter-webflux"
+        const val log = "$group:spring-boot-starter-logging"
         const val starterTest = "$group:spring-boot-starter-test"
         const val configuration = "$group:spring-boot-configuration-processor"
         const val cache = "$group:spring-boot-starter-cache"

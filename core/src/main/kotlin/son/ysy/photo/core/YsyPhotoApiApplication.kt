@@ -6,6 +6,7 @@ import org.springframework.boot.runApplication
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.ComponentScans
+@EnableCaching
 
 @SpringBootApplication
 @MapperScan("son.ysy.photo.mapper")
@@ -15,7 +16,6 @@ import org.springframework.context.annotation.ComponentScans
         ComponentScan("son.ysy.photo.service"),
         ComponentScan("son.ysy.photo.controller")
 )
-@EnableCaching
 open class YsyPhotoApiApplication
 
 fun main(args: Array<String>) {
