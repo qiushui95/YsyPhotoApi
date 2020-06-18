@@ -20,8 +20,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for ImageInfo
 -- ----------------------------
-DROP TABLE IF EXISTS `ImageInfo`;
-CREATE TABLE `ImageInfo`  (
+CREATE TABLE IF NOT EXISTS `ImageInfo`(
   `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图片uuid',
   `imageUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图片链接',
   `width` int(0) NOT NULL COMMENT '图片宽度',
@@ -39,8 +38,7 @@ CREATE TABLE `ImageInfo`  (
 -- ----------------------------
 -- Table structure for RelationshipInfo
 -- ----------------------------
-DROP TABLE IF EXISTS `RelationshipInfo`;
-CREATE TABLE `RelationshipInfo`  (
+CREATE TABLE IF NOT EXISTS `RelationshipInfo`(
   `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '关系uuid',
   `relationship` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '关系说明',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
@@ -51,8 +49,7 @@ CREATE TABLE `RelationshipInfo`  (
 -- ----------------------------
 -- Table structure for UserInfo
 -- ----------------------------
-DROP TABLE IF EXISTS `UserInfo`;
-CREATE TABLE `UserInfo`  (
+CREATE TABLE IF NOT EXISTS `UserInfo` (
   `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户uuid',
   `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '手机号',
   `avatarId` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ImageInfo  id外键',

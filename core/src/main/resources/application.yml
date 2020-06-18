@@ -3,6 +3,10 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+    schema: classpath:database/schema/54ysy.sql
+    data: database/data/RelationshipInfo.sql
+    separator: ;;
+    initialization-mode: always
   mvc:
     converters:
       preferred-json-mapper: gson
