@@ -7,7 +7,7 @@ import son.ysy.photo.ext.subListNotIn
 import son.ysy.photo.mapper.DatabaseTables
 import son.ysy.photo.mapper.ImageInfoMapper
 import son.ysy.photo.mapper.ImageType
-import son.ysy.photo.model.pojo.POJOImageInfo
+import son.ysy.photo.model.tables.POJOImageInfo
 import son.ysy.photo.model.request.RequestUploadPreCheck
 import son.ysy.photo.model.response.ResponsePreCheck
 import son.ysy.photo.model.response.ResponseUploadToken

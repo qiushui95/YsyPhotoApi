@@ -1,4 +1,4 @@
-package son.ysy.photo.model.pojo
+package son.ysy.photo.model.tables
 
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableId

@@ -13,7 +13,7 @@ class CommonParameterInterceptor : HandlerInterceptorAdapter() {
         val debug = request.getHeader(ParameterNames.PARAMETER_NAME_DEBUG)?.toBoolean()
         val versionCode = request.getHeader(ParameterNames.PARAMETER_NAME_VERSION_CODE)?.toIntOrNull()
 
-//        Thread.sleep(5000)
+//        Thread.sleep(10000)
         when {
             debug == null -> {
                 throw ParameterMissException(ParameterNames.PARAMETER_NAME_DEBUG)

@@ -14,6 +14,7 @@ import org.springframework.context.annotation.ComponentScans
         ComponentScan("son.ysy.photo.property"),
         ComponentScan("son.ysy.photo.configuration"),
         ComponentScan("son.ysy.photo.service"),
+        ComponentScan("son.ysy.photo.model.vo"),
         ComponentScan("son.ysy.photo.controller")
 )
 open class YsyPhotoApiApplication

@@ -3,11 +3,11 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    schema: classpath:database/schema/54ysy.sql
-    data:
-      - classpath:database/data/UserInfo.sql
-      - classpath:database/data/ImageInfo.sql
-      - classpath:database/data/RelationshipInfo.sql
+#    schema: classpath:database/schema/54ysy.sql
+#    data:
+#      - classpath:database/data/UserInfo.sql
+#      - classpath:database/data/ImageInfo.sql
+#      - classpath:database/data/RelationshipInfo.sql
     separator: ;;
     initialization-mode: always
   mvc:
@@ -16,6 +16,7 @@ spring:
 
 server:
   port: 80
+
 
 mybatis-plus:
   configuration:

@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 18/06/2020 18:04:09
+ Date: 19/06/2020 17:08:46
 */
 
 SET NAMES utf8mb4;;
@@ -20,7 +20,8 @@ SET FOREIGN_KEY_CHECKS = 0;;
 -- ----------------------------
 -- Table structure for ImageInfo
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `ImageInfo`(
+CREATE TABLE IF NOT EXISTS `ImageInfo`  (
+  `row` int(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图片uuid',
   `imageUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图片链接',
   `width` int(0) NOT NULL COMMENT '图片宽度',
@@ -32,94 +33,89 @@ CREATE TABLE IF NOT EXISTS `ImageInfo`(
   `userId` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'UserInfo外键id',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `updateTime` datetime(0) NOT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`row`) USING BTREE,
+  INDEX `index_image_id_md5`(`id`, `md5`) USING BTREE COMMENT '图片查询索引',
+  UNIQUE INDEX `unique_image_id`(`id`) USING BTREE COMMENT 'id唯一索引',
+  UNIQUE INDEX `unique_image_md5`(`md5`) USING BTREE COMMENT 'md5唯一索引'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '图像信息表' ROW_FORMAT = DYNAMIC;;
 
 -- ----------------------------
 -- Table structure for RelationshipInfo
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `RelationshipInfo`(
+CREATE TABLE IF NOT EXISTS `RelationshipInfo`  (
+  `row` int(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '关系uuid',
   `relationship` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '关系说明',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `updateTime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`row`) USING BTREE,
+  UNIQUE INDEX `unique_relationship_id`(`id`) USING BTREE COMMENT 'id唯一索引',
+  UNIQUE INDEX `unique_relationship_relationship`(`relationship`) USING BTREE COMMENT 'relationship唯一索引',
+  INDEX `index_relationship_id`(`id`) USING BTREE COMMENT '关系查询索引'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '关系表' ROW_FORMAT = DYNAMIC;;
 
 -- ----------------------------
 -- Table structure for UserInfo
 -- ----------------------------
-CREATE TABLE IF NOT EXISTS `UserInfo` (
+CREATE TABLE IF NOT EXISTS `UserInfo`  (
+  `row` int(0) NOT NULL AUTO_INCREMENT,
   `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户uuid',
   `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '手机号',
   `avatarId` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ImageInfo  id外键',
   `relationshipId` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'RelationshipInfo id外键',
   `createTime` datetime(0) NOT NULL COMMENT '创建时间',
   `updateTime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE,
+  PRIMARY KEY (`row`) USING BTREE,
   UNIQUE INDEX `unique_user_phone`(`phone`) USING BTREE COMMENT '手机号唯一索引',
-  INDEX `fk_relationship`(`relationshipId`) USING BTREE,
-  INDEX `index_user_phone`(`phone`) USING BTREE,
-  INDEX `fk_avatar`(`avatarId`) USING BTREE,
-  CONSTRAINT `fk_relationship` FOREIGN KEY (`relationshipId`) REFERENCES `RelationshipInfo` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `fk_avatar` FOREIGN KEY (`avatarId`) REFERENCES `ImageInfo` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  INDEX `fk_relationship`(`relationshipId`) USING BTREE COMMENT '关系外键',
+  INDEX `index_user_phone`(`phone`) USING BTREE COMMENT '手机号查询索引',
+  INDEX `fk_avatar`(`avatarId`) USING BTREE COMMENT '头像图片外键',
+  UNIQUE INDEX `unique_user_id`(`id`) USING BTREE COMMENT 'id唯一索引',
+  INDEX `index_user_id`(`id`) USING BTREE COMMENT 'id查询索引',
+  CONSTRAINT `fk_avatar` FOREIGN KEY (`avatarId`) REFERENCES `ImageInfo` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `fk_relationship` FOREIGN KEY (`relationshipId`) REFERENCES `RelationshipInfo` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;;
 
 -- ----------------------------
 -- Triggers structure for table ImageInfo
 -- ----------------------------
 DROP TRIGGER IF EXISTS `trigger_image_create`;;
-CREATE TRIGGER `trigger_image_create` BEFORE INSERT ON `ImageInfo` FOR EACH ROW begin
- set new.updateTime=now();
- set new.createTime=now();
-end
+CREATE TRIGGER `trigger_image_create` BEFORE INSERT ON `ImageInfo` FOR EACH ROW begin set new.updateTime=now(3); set new.createTime=now(3); end
 ;;
 
 -- ----------------------------
 -- Triggers structure for table ImageInfo
 -- ----------------------------
 DROP TRIGGER IF EXISTS `trigger_image_update`;;
-CREATE TRIGGER `trigger_image_update` BEFORE UPDATE ON `ImageInfo` FOR EACH ROW begin
- set new.updateTime=now();
-end
+CREATE TRIGGER `trigger_image_update` BEFORE UPDATE ON `ImageInfo` FOR EACH ROW begin set new.updateTime=now(3); end
 ;;
 
 -- ----------------------------
 -- Triggers structure for table RelationshipInfo
 -- ----------------------------
 DROP TRIGGER IF EXISTS `trigger_relationship_create`;;
-CREATE TRIGGER `trigger_relationship_create` BEFORE INSERT ON `RelationshipInfo` FOR EACH ROW begin
- set new.updateTime=now();
- set new.createTime=now();
-end
+CREATE TRIGGER `trigger_relationship_create` BEFORE INSERT ON `RelationshipInfo` FOR EACH ROW begin set new.updateTime=now(3); set new.createTime=now(3); end
 ;;
 
 -- ----------------------------
 -- Triggers structure for table RelationshipInfo
 -- ----------------------------
 DROP TRIGGER IF EXISTS `trigger_relationship_update`;;
-CREATE TRIGGER `trigger_relationship_update` BEFORE UPDATE ON `RelationshipInfo` FOR EACH ROW begin
- set new.updateTime=now();
-end
-;;
-
--- ----------------------------
--- Triggers structure for table UserInfo
--- ----------------------------
-DROP TRIGGER IF EXISTS `trigger_user_create`;;
-CREATE TRIGGER `trigger_user_create` BEFORE INSERT ON `UserInfo` FOR EACH ROW begin
- set new.updateTime=now();
- set new.createTime=now();
-end
+CREATE TRIGGER `trigger_relationship_update` BEFORE UPDATE ON `RelationshipInfo` FOR EACH ROW begin set new.updateTime=now(3); end
 ;;
 
 -- ----------------------------
 -- Triggers structure for table UserInfo
 -- ----------------------------
 DROP TRIGGER IF EXISTS `trigger_user_update`;;
-CREATE TRIGGER `trigger_user_update` BEFORE UPDATE ON `UserInfo` FOR EACH ROW begin
- set new.updateTime=now();
-end
+CREATE TRIGGER `trigger_user_update` BEFORE UPDATE ON `UserInfo` FOR EACH ROW begin set new.updateTime=now(); end
+;;
+
+-- ----------------------------
+-- Triggers structure for table UserInfo
+-- ----------------------------
+DROP TRIGGER IF EXISTS `trigger_user_create`;;
+CREATE TRIGGER `trigger_user_create` BEFORE INSERT ON `UserInfo` FOR EACH ROW begin set new.updateTime=now(3); set new.createTime=now(3); end
 ;;
 
 SET FOREIGN_KEY_CHECKS = 1;;

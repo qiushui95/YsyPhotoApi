@@ -6,7 +6,7 @@ import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.stereotype.Service
 import son.ysy.photo.mapper.DatabaseTables
 import son.ysy.photo.mapper.UserInfoMapper
-import son.ysy.photo.model.pojo.POJOUserInfo
+import son.ysy.photo.model.tables.POJOUserInfo
 import son.ysy.photo.model.response.ResponseLoginResult
 import son.ysy.photo.throwables.login.UserNotRegisterException
 import son.ysy.photo.throwables.login.OtherUserHasLoginException

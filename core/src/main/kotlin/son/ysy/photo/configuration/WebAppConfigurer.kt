@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import son.ysy.photo.interceptor.CommonParameterInterceptor
+import son.ysy.photo.interceptor.ParameterInsertInterceptor
 import son.ysy.photo.interceptor.TokenInterceptor
 import son.ysy.photo.interceptor.VersionCheckInterceptor
 
@@ -13,11 +14,15 @@ open class WebAppConfigurer : WebMvcConfigurer {
 
     @Bean
     open fun getCommonParameterInterceptor() = CommonParameterInterceptor()
+
     @Bean
     open fun getVersionCheckInterceptor() = VersionCheckInterceptor()
 
     @Bean
     open fun getTokenInterceptor() = TokenInterceptor()
+
+    @Bean
+    open fun getPageInfoInterceptor() = ParameterInsertInterceptor()
 
     override fun addInterceptors(registry: InterceptorRegistry) {
         super.addInterceptors(registry)
@@ -28,6 +33,9 @@ open class WebAppConfigurer : WebMvcConfigurer {
                 .addPathPatterns("/**")
 
         registry.addInterceptor(getTokenInterceptor())
+                .addPathPatterns("/**")
+
+        registry.addInterceptor(getPageInfoInterceptor())
                 .addPathPatterns("/**")
     }
 }

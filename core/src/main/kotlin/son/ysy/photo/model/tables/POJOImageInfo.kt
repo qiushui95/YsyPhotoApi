@@ -1,4 +1,4 @@
-package son.ysy.photo.model.pojo
+package son.ysy.photo.model.tables
 
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableName
@@ -44,5 +44,10 @@ data class POJOImageInfo(
          * 图片唯一md5
          */
         @TableField(DatabaseTables.ImageInfo.FIELD_NAME_MD5)
-        val md5: String
+        val md5: String,
+        /**
+         * 上传者id
+         */
+        @TableField(DatabaseTables.ImageInfo.FIELD_NAME_USER_ID)
+        val userId: String
 ) : BasePOJO()
