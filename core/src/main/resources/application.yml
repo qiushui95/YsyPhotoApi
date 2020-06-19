@@ -4,7 +4,10 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     schema: classpath:database/schema/54ysy.sql
-    data: database/data/RelationshipInfo.sql
+    data:
+      - classpath:database/data/UserInfo.sql
+      - classpath:database/data/ImageInfo.sql
+      - classpath:database/data/RelationshipInfo.sql
     separator: ;;
     initialization-mode: always
   mvc:
