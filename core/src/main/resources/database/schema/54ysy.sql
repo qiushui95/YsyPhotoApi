@@ -28,11 +28,11 @@ CREATE TABLE IF NOT EXISTS `ImageInfo`  (
   `height` int(0) NOT NULL COMMENT '图片高度',
   `hasDelete` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否删除',
   `imageType` tinyint(0) NOT NULL COMMENT '图片用途,1->显示，2->头像',
-  `takeTime` datetime(0) NOT NULL COMMENT '拍照时间',
+  `takeTime` datetime(3) NOT NULL COMMENT '拍照时间',
   `md5` char(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '原图片MD5',
   `userId` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'UserInfo外键id',
-  `createTime` datetime(0) NOT NULL COMMENT '创建时间',
-  `updateTime` datetime(0) NOT NULL COMMENT '更新时间',
+  `createTime` datetime(3) NOT NULL COMMENT '创建时间',
+  `updateTime` datetime(3) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`row`) USING BTREE,
   INDEX `index_image_id_md5`(`id`, `md5`) USING BTREE COMMENT '图片查询索引',
   UNIQUE INDEX `unique_image_id`(`id`) USING BTREE COMMENT 'id唯一索引',
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `RelationshipInfo`  (
   `row` int(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '关系uuid',
   `relationship` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '关系说明',
-  `createTime` datetime(0) NOT NULL COMMENT '创建时间',
-  `updateTime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `createTime` datetime(3) NOT NULL COMMENT '创建时间',
+  `updateTime` datetime(3) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`row`) USING BTREE,
   UNIQUE INDEX `unique_relationship_id`(`id`) USING BTREE COMMENT 'id唯一索引',
   UNIQUE INDEX `unique_relationship_relationship`(`relationship`) USING BTREE COMMENT 'relationship唯一索引',
@@ -63,8 +63,8 @@ CREATE TABLE IF NOT EXISTS `UserInfo`  (
   `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '手机号',
   `avatarId` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ImageInfo  id外键',
   `relationshipId` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'RelationshipInfo id外键',
-  `createTime` datetime(0) NOT NULL COMMENT '创建时间',
-  `updateTime` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `createTime` datetime(3) NOT NULL COMMENT '创建时间',
+  `updateTime` datetime(3) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`row`) USING BTREE,
   UNIQUE INDEX `unique_user_phone`(`phone`) USING BTREE COMMENT '手机号唯一索引',
   INDEX `fk_relationship`(`relationshipId`) USING BTREE COMMENT '关系外键',
@@ -108,7 +108,7 @@ CREATE TRIGGER `trigger_relationship_update` BEFORE UPDATE ON `RelationshipInfo`
 -- Triggers structure for table UserInfo
 -- ----------------------------
 DROP TRIGGER IF EXISTS `trigger_user_update`;;
-CREATE TRIGGER `trigger_user_update` BEFORE UPDATE ON `UserInfo` FOR EACH ROW begin set new.updateTime=now(); end
+CREATE TRIGGER `trigger_user_update` BEFORE UPDATE ON `UserInfo` FOR EACH ROW begin set new.updateTime=now(3); end
 ;;
 
 -- ----------------------------
@@ -119,3 +119,5 @@ CREATE TRIGGER `trigger_user_create` BEFORE INSERT ON `UserInfo` FOR EACH ROW be
 ;;
 
 SET FOREIGN_KEY_CHECKS = 1;;
+
+SET time_zone = '+8:00';;

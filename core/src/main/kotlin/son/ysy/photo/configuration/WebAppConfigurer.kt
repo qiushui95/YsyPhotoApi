@@ -2,10 +2,12 @@ package son.ysy.photo.configuration
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import son.ysy.photo.configuration.argument.PageArgumentResolver
+import son.ysy.photo.configuration.argument.UserIdArgumentResolver
 import son.ysy.photo.interceptor.CommonParameterInterceptor
-import son.ysy.photo.interceptor.ParameterInsertInterceptor
 import son.ysy.photo.interceptor.TokenInterceptor
 import son.ysy.photo.interceptor.VersionCheckInterceptor
 
@@ -22,7 +24,10 @@ open class WebAppConfigurer : WebMvcConfigurer {
     open fun getTokenInterceptor() = TokenInterceptor()
 
     @Bean
-    open fun getPageInfoInterceptor() = ParameterInsertInterceptor()
+    open fun getPageArgumentResolver() = PageArgumentResolver()
+
+    @Bean
+    open fun getUserIdArgumentResolver() = UserIdArgumentResolver()
 
     override fun addInterceptors(registry: InterceptorRegistry) {
         super.addInterceptors(registry)
@@ -34,8 +39,13 @@ open class WebAppConfigurer : WebMvcConfigurer {
 
         registry.addInterceptor(getTokenInterceptor())
                 .addPathPatterns("/**")
+    }
 
-        registry.addInterceptor(getPageInfoInterceptor())
-                .addPathPatterns("/**")
+    override fun addArgumentResolvers(resolvers: MutableList<HandlerMethodArgumentResolver>) {
+        super.addArgumentResolvers(resolvers)
+        resolvers.apply {
+            add(getPageArgumentResolver())
+            add(getUserIdArgumentResolver())
+        }
     }
 }

@@ -8,5 +8,6 @@ data class UserUploadRecordVo(
         val width: Int,
         val height: Int,
         val takeTime: Date,
-        val uploadTime: Date
+        val uploadTime: Date,
+        val relationship: String?
 )

@@ -67,7 +67,7 @@ class UserInfoServiceImpl : IUserInfoService {
         ResponseUserInfo(avatarUrl, userInfo.phone.hideWord(3, 4), relationship)
     }
 
-    override fun getUploadRecord(page: Page<*>, userId: String): Page<UserUploadRecordVo> {
-        return userUploadMapper.selectUserUploadRecord(page, userId)
+    override fun getMineUploadRecord(page: Page<UserUploadRecordVo>, userId: String): Page<UserUploadRecordVo> {
+        return userUploadMapper.selectMineUploadRecord(page, userId)
     }
 }

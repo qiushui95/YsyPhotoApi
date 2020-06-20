@@ -32,7 +32,7 @@ class ImageInfoMapperTest {
 
     @Test
     fun insertMore() {
-        0.until(1000)
+        0.until(995)
                 .map {
                     POJOImageInfo(it.toString(), it * 1, it + 2, false, ImageType.Photo.type, Date(), it.toString(), "d6616b21-5360-4fb3-b4a4-49d5ef386568")
                 }

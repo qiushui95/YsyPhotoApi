@@ -1,5 +1,7 @@
-package son.ysy.photo.core
+package son.ysy.photo.core.controllers
 
+import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,23 +16,28 @@ import son.ysy.photo.model.constant.ParameterNames
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-class UserInfoControllerTest {
-    @Autowired
-    private lateinit var context: WebApplicationContext
+class UserInfoControllerTest : BaseControllerTest() {
 
-    private val mock by lazy {
-        MockMvcBuilders.webAppContextSetup(context)
-                .build()
+    private val loginControllerTest = LoginControllerTest()
+
+    @Before
+    fun beforeLogin() {
+        login()
+    }
+
+
+    fun insertMoreImage(){
+
     }
 
     @Test
     fun testGetUploadRecord() {
+        loginControllerTest.testLogin()
         val result = mock.perform(
                 MockMvcRequestBuilders.get("/user/upload/record")
-                        .header(ParameterNames.PARAMETER_NAME_USER_ID, "d6616b21-5360-4fb3-b4a4-49d5ef386568")
-                        .header(ParameterNames.PARAMETER_NAME_TOKEN, "13540817567")
-                        .header(ParameterNames.PARAMETER_NAME_DEBUG, true)
-                        .header(ParameterNames.PARAMETER_NAME_VERSION_CODE, 1)
+                        .addCommonInfo()
+                        .addLoginInfo()
+                        .queryParam(ParameterNames.PARAMETER_NAME_PAGE, "12")
         ).andReturn()
         println(result.response.contentAsString)
     }

@@ -8,5 +8,5 @@ interface IUserInfoService {
 
     fun getUserInfo(userId: String): ResponseUserInfo
 
-    fun getUploadRecord(page: Page<*>, userId: String): Page<UserUploadRecordVo>
+    fun getMineUploadRecord(page: Page<UserUploadRecordVo>, userId: String): Page<UserUploadRecordVo>
 }
