@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `ImageInfo`  (
   `hasDelete` bit(1) NOT NULL DEFAULT b'0' COMMENT '是否删除',
   `imageType` tinyint(0) NOT NULL COMMENT '图片用途,1->显示，2->头像',
   `takeTime` datetime(3) NOT NULL COMMENT '拍照时间',
-  `md5` char(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '原图片MD5',
+  `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '原图片MD5',
   `userId` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'UserInfo外键id',
   `createTime` datetime(3) NOT NULL COMMENT '创建时间',
   `updateTime` datetime(3) NOT NULL COMMENT '更新时间',

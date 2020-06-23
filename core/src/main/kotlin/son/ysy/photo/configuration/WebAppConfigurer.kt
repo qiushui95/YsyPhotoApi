@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import son.ysy.photo.configuration.argument.LoginResultArgumentResolver
 import son.ysy.photo.configuration.argument.PageArgumentResolver
 import son.ysy.photo.configuration.argument.UserIdArgumentResolver
 import son.ysy.photo.interceptor.CommonParameterInterceptor
@@ -28,6 +29,8 @@ open class WebAppConfigurer : WebMvcConfigurer {
 
     @Bean
     open fun getUserIdArgumentResolver() = UserIdArgumentResolver()
+    @Bean
+    open fun getLoginResultArgumentResolver() = LoginResultArgumentResolver()
 
     override fun addInterceptors(registry: InterceptorRegistry) {
         super.addInterceptors(registry)
@@ -46,6 +49,7 @@ open class WebAppConfigurer : WebMvcConfigurer {
         resolvers.apply {
             add(getPageArgumentResolver())
             add(getUserIdArgumentResolver())
+            add(getLoginResultArgumentResolver())
         }
     }
 }

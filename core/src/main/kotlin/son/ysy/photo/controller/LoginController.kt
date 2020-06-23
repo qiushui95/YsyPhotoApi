@@ -3,6 +3,8 @@ package son.ysy.photo.controller
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import son.ysy.photo.annotations.LoginCheck
+import son.ysy.photo.model.constant.ParameterNames
+import son.ysy.photo.model.response.ResponseLoginResult
 import son.ysy.photo.service.login.ILoginServer
 
 @RestController
@@ -14,8 +16,8 @@ class LoginController {
 
     @PostMapping
     @LoginCheck(needCheck = false)
-    fun postLogin(@RequestParam("phone") phone: String) = loginserver.getLoginToken(phone)
+    fun postLogin(@RequestParam(ParameterNames.PARAMETER_NAME_PHONE) phone: String) = loginserver.getLoginToken(phone)
 
     @GetMapping
-    fun checkLogin() = true
+    fun checkLogin(responseLoginResult: ResponseLoginResult) = responseLoginResult
 }
