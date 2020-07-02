@@ -3,38 +3,26 @@ package son.ysy.photo.service.upload
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import son.ysy.photo.ext.subListNotIn
 import son.ysy.photo.mapper.DatabaseTables
 import son.ysy.photo.mapper.ImageInfoMapper
 import son.ysy.photo.mapper.ImageType
-import son.ysy.photo.model.tables.POJOImageInfo
-import son.ysy.photo.model.request.RequestUploadPreCheck
-import son.ysy.photo.model.response.ResponsePreCheck
 import son.ysy.photo.model.response.ResponseUploadToken
+import son.ysy.photo.model.tables.POJOImageInfo
 import son.ysy.photo.property.QiNiuProperty
-import java.util.*
+import javax.annotation.Resource
 
 @Service
 class UploadServiceImpl : IUploadService {
 
-    @Autowired
+    @Resource
     private lateinit var imageInfoMapper: ImageInfoMapper
 
     @Autowired
     private lateinit var qiNiuProperty: QiNiuProperty
 
-    override fun preCheck(uploadImageList: List<RequestUploadPreCheck>): ResponsePreCheck {
-        val list = imageInfoMapper.selectList(
-                QueryWrapper<POJOImageInfo>()
-                        .`in`(DatabaseTables.ImageInfo.FIELD_NAME_MD5, uploadImageList.map { it.md5.toLowerCase(Locale.ENGLISH) })
-        ).map {
-            it.md5
-        }
-        val canUploadList = uploadImageList.filterNot {
-            it.md5 in list
-        }
-        val containedList = uploadImageList.subListNotIn(canUploadList)
-        return ResponsePreCheck(canUploadList, containedList)
+    override fun preCheck(imageMd5: String): Boolean {
+
+        return imageInfoMapper.selectOne(QueryWrapper<POJOImageInfo>().eq(DatabaseTables.ImageInfo.FIELD_NAME_MD5, imageMd5)) == null
     }
 
     override fun getUploadToken(type: Int): ResponseUploadToken {

@@ -12,4 +12,7 @@ object ParameterNames {
 
     const val PARAMETER_NAME_PHONE = "phone"
 
+    const val PARAMETER_NAME_IMAGE_MD5 = "imageMd5"
+    const val PARAMETER_NAME_IMAGE_TYPE = "imageType"
+
 }
